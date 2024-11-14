@@ -1,0 +1,176 @@
+//Defining color styles
+$baseDark: #121826;
+$baseLight: #E5E7EB;
+$grayLight: #D2D5DA;
+$grayDark: #9DA3AE;
+$cardBackground: #212936;
+$iconBgFeedback: #FCEED8;
+$iconBgQuestions: #DEE9FC;
+$iconBgRespond: #FBE5E6;
+
+//Defining the typography
+@mixin headingL {
+    font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 2.5rem;
+}
+
+@mixin headingS {
+    font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.25rem;
+}
+
+@mixin body {
+    font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+//Layout & styling
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: $baseDark;
+    background-image: url('../images/Background_image.svg');
+    color: $baseLight;
+    padding: 64px 180px 0 180px;
+}
+
+h1 {
+    @include headingL();
+}
+
+h2 {
+    @include headingS();
+}
+
+p {
+    @include body();
+}
+
+.header {
+    width: 60%;
+    max-width: 720px;
+    text-align: center;
+    margin: 0 auto;
+
+    h1 {
+        text-wrap: balance;
+        margin-bottom: 16px;
+    }
+
+    p {
+        color: $grayDark;
+    }
+}
+
+.cardWrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 48px;
+    margin-top: 40px;
+    
+    .card {
+        flex-basis: calc(33% - 48px);
+        background-color: $cardBackground;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 24px;
+        border-radius: 24px;
+        flex-basis: 315px;
+
+        transition: opacity .5s ease-out; // global
+        -moz-transition: opacity .5s ease-out; // for mozilla
+        -o-transition: opacity .5s ease-out; // for opera
+        -webkit-transition: opacity .5s ease-out; //for webkit, chrome or safari
+
+        .cardIcon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            span {
+                font-size: 1.5em;
+            }
+        }
+
+        .iconFeedback {
+            background-color: $iconBgFeedback;
+        }
+
+        .iconQuestions {
+            background-color: $iconBgQuestions;
+        }
+
+        .iconRespond {
+            background-color: $iconBgRespond;
+        }
+
+        img {
+            border-radius: 16px;
+            display: inline;
+
+        }
+
+    } 
+}
+
+//Decrese the opacity for cards 2 and 3 when card 1 is hovered
+.cardWrap:has(.cardFeedback:hover) {
+    cursor: pointer;
+
+    .cardQuestions, .cardRespond {
+        opacity: .5;
+    }
+}
+
+//Decrese the opacity for cards 1 and 3 when card 2 is hovered
+.cardWrap:has(.cardQuestions:hover) {
+    cursor: pointer;
+
+    .cardFeedback, .cardRespond {
+        opacity: .5;
+    }
+}
+
+//Decrese the opacity for cards 1 and 2 when card 3 is hovered
+.cardWrap:has(.cardRespond:hover) {
+    cursor: pointer;
+
+    .cardFeedback, .cardQuestions {
+        opacity: .5;
+    }
+}
+
+@media (max-width: 1024px) {
+    .header {
+        width: 70%;
+    }
+
+    body {
+        padding: 64px 0px 0 0px;
+    }
+
+}
+
+@media (max-width: 640px) {
+    .header {
+        width: 100%;
+    }
+}
